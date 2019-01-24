@@ -8,7 +8,7 @@ The papar <a href="https://www.frontiersin.org/articles/10.3389/fnins.2019.00031
 
 Contact <zhangwenrui@tamu.edu> if you have any questions or concerns.
 
-##Some syntax for the netlist:
+### Some syntax for the netlist:
 
 1) neuronGroup: Use this to create a group of neurons
 

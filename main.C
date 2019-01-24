@@ -130,7 +130,11 @@ int main(int argc, char * argv[]){
     for(i = 0; i < NUM_THREADS; i++){
         array_network[i].SetTid(i);
         Parser parser(&array_network[i]);
+#ifdef SPIKL_IP
+        parser.Parse("netlist_SpiKL_IP.txt"); // For English spoken letters
+#else
         parser.Parse("netlist.txt"); // For English spoken letters
+#endif
         array_network[i].CrossValidation(NFOLD);
     }
 

@@ -1,7 +1,7 @@
 neurongroup input 78 excitatory
 column reservoir 3 3 15
 neurongroup output 26 excitatory 
-lsmsynapse input reservoir 1 32 8 1 fixed
+lsmsynapse input reservoir 1 16 2 1 fixed
 lsmsynapse reservoir output -1 -1 8 2 learning
 speech	0	ti_alpha/f1_u10_c0.dat
 speech	1	ti_alpha/f1_u10_c1.dat

@@ -109,6 +109,7 @@ void Parser::Parse(const char * filename){
 }
 
 void Parser::ParseNeuronGroup(char * name, int num, char * e_i, double v_mem){
+	cout<<std::string(name)<<endl;
     assert(_network->CheckExistence(name) == false);
     assert(num > 1);
     assert((strcmp(e_i,"excitatory")==0)||(strcmp(e_i,"inhibitory")==0));

@@ -798,6 +798,9 @@ NeuronGroup::NeuronGroup(char * name, int dim1, int dim2, int dim3, Network * ne
         else excitatory = true;
         sprintf(neuronName,"%s_%d",name,i);
         Neuron * neuron = new Neuron(neuronName,excitatory,network);
+#ifdef SPIKL_IP
+        neuron->EnableSpiKL_IP(true);
+#endif
         neuron->SetIndexInGroup(i);
         _neurons[i] = neuron;
         _lsm_coordinates[i] = new int[3];

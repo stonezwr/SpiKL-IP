@@ -808,12 +808,13 @@ void Network::CrossValidation(int fold){
     index = new vector<int>*[cls];
     for(i = 0; i < cls; i++){
         index[i] = new vector<int>;
-        for(j = 0; j < sample/cls; j++) index[i]->push_back(i+j*cls);
+        for(j = 0; j < SAMPLES_PER_CLASS; j++) 
+			index[i]->push_back(j+i*SAMPLES_PER_CLASS);
         random_shuffle(index[i]->begin(),index[i]->end());
     }
 
     for(k = 0; k < fold; k++)
-        for(j = (k*sample)/(cls*fold); j < ((k+1)*sample)/(cls*fold); j++)
+        for(j = (k*SAMPLES_PER_CLASS)/fold; j < ((k+1)*SAMPLES_PER_CLASS)/fold; j++)
             for(i = 0; i < cls; i++){
                 _CVspeeches[k].push_back(_speeches[(*index[i])[j]]);
             }

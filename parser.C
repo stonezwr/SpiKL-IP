@@ -132,25 +132,56 @@ void Parser::ParseLSMSynapse(char * from, char * to, int fromN, int toN, int val
 }
 
 void Parser::ParseSpeech(int cls, char* path){
-    Speech * speech = new Speech(cls);
-    Channel * channel;
-
-    char linestring[8192];
-    char * token;
-    FILE * fp = fopen(path,"r");
-    assert(fp != NULL);
-    int index = 0;
-    _network->AddSpeech(speech);
-    while(fgets(linestring,8191,fp)!=NULL){
-        if(strlen(linestring) <= 1) continue;
-        channel = speech->AddChannel(10, 1, index++);
-        token = strtok(linestring," \t\n");
-        while(token != NULL){
-            channel->AddAnalog(atof(token));
-            token = strtok(NULL," \t\n");
-        }
-    }
-
-    fclose(fp);
+	if(path==NULL){
+		cout<<"directory path is NULL"<<endl;
+		assert(0);
+	}
+	//check if path is a valid dir
+	struct stat s;
+	lstat(path,&s);
+	if(!S_ISDIR(s.st_mode)){
+		cout<<"path is not a valid directory"<<endl;
+		assert(0);
+	}
+	struct dirent* filename;
+	DIR *dir;
+	dir=opendir(path);
+	if(dir==NULL){
+		cout<<"Cannot open dir"<<endl;
+		assert(0);
+	}
+	int file_read=0;
+	while((filename=readdir(dir))!=NULL&&file_read<SAMPLES_PER_CLASS){
+		const size_t len = strlen(path)+strlen(filename->d_name);
+		char *file_path=new char[len+1];
+		strcpy(file_path,path);
+		if(filename->d_name[0]<'a'||filename->d_name[0]>'z'){
+			continue;
+		}
+		strcat(file_path,filename->d_name);
+		Speech * speech = new Speech(cls);
+		Channel * channel;
+		char linestring[8192];
+		char * token;
+		FILE * fp = fopen(file_path,"r");
+		if(fp==NULL){
+			assert(0);	
+		}
+		_network->AddSpeech(speech);
+		int index = 0;
+		while(fgets(linestring,8191,fp)!=NULL){
+			if(strlen(linestring) <= 1) continue;
+			channel = speech->AddChannel(10, 1, index++);
+			token = strtok(linestring," \t\n");
+			while(token != NULL){
+				channel->AddAnalog(atof(token));
+				token = strtok(NULL," \t\n");
+			}
+		}
+		fclose(fp);
+		delete token;
+		file_read++;
+	}
+	closedir(dir);
 }
 

@@ -40,6 +40,8 @@
 
 #define SPIKL_IP
 
+#define SAMPLES_PER_CLASS 10
+
 enum channelmode_t {INPUTCHANNEL,RESERVOIRCHANNEL, OUTPUTCHANNEL}; // for allocate speech channels
 enum neuronmode_t {DEACTIVATED,READCHANNEL,WRITECHANNEL,NORMAL}; // for implement network stat.
 enum networkmode_t {TRANSIENTSTATE,READOUT,VOID}; // different network mode

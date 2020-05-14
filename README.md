@@ -6,7 +6,7 @@ The code can be run in parallel to crossvalidate Speech data TI46.
 
 The papar <a href="https://www.frontiersin.org/articles/10.3389/fnins.2019.00031/abstract"> Information-Theoretic Intrinsic Plasticity for Online Unsupervised Learning in Spiking Neural Networks</a> is published by the Frontiers in Neuroscience.
 
-Contact <zhangwenrui@tamu.edu> if you have any questions or concerns.
+Contact <wenruizhang@ucsb.edu> if you have any questions or concerns.
 
 ### Some syntax for the netlist:
 
